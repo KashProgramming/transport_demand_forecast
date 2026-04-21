@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fafaf9;
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-xl shadow-sm border border-neutral-200 p-6;
+  }
+  
+  .metric-card {
+    @apply bg-gradient-to-br from-white to-neutral-50 rounded-lg p-5 border border-neutral-200 hover:shadow-md transition-shadow;
+  }
+  
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium px-6 py-3 rounded-lg transition-colors shadow-sm hover:shadow-md;
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-neutral-50 text-neutral-700 font-medium px-6 py-3 rounded-lg border border-neutral-300 transition-colors;
+  }
+  
+  .tab-button {
+    @apply px-6 py-3 font-medium rounded-lg transition-all;
+  }
+  
+  .tab-button-active {
+    @apply bg-primary-600 text-white shadow-sm;
+  }
+  
+  .tab-button-inactive {
+    @apply bg-white text-neutral-600 hover:bg-neutral-50 border border-neutral-200;
+  }
+}
