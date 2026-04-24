@@ -37,9 +37,7 @@ app = FastAPI(
 ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Local development
     "http://localhost:3000",  # Alternative local port
-    "https://*.vercel.app",   # All Vercel preview deployments
-    # Add your production Vercel URL here after deployment:
-    # "https://your-app.vercel.app",
+    "https://transport-demand-forecasting.vercel.app"
 ]
 
 app.add_middleware(
