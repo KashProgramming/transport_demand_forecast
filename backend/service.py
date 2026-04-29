@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import sys
 import warnings
 from dataclasses import dataclass
@@ -559,8 +560,11 @@ class TransportForecastService:
                 y_train = y[:split_idx_features]
                 y_test = y[split_idx_features : split_idx_features + len(test_data)]
 
+        # In production, we want to reuse models trained on larger datasets
+        # Set USE_SAMPLE_IN_HASH=false in environment to allow this
+        use_sample_in_hash = os.getenv('USE_SAMPLE_IN_HASH', 'true').lower() == 'true'
         model_config = self.model_manager.get_config_from_params(
-            data_file, effective_sample_size
+            data_file, effective_sample_size, use_sample_in_hash=use_sample_in_hash
         )
         _, config_hash = self.model_manager.models_exist(model_config)
 

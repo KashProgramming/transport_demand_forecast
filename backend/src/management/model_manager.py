@@ -221,7 +221,8 @@ class ModelManager:
                     logger.error(f"Failed to delete {file}: {e}")
     
     def get_config_from_params(self, data_file: str, sample_size: Optional[int], 
-                               train_split: float = 0.8) -> Dict[str, Any]:
+                               train_split: float = 0.8, 
+                               use_sample_in_hash: bool = True) -> Dict[str, Any]:
         """
         Create configuration dictionary from parameters
         
@@ -229,13 +230,20 @@ class ModelManager:
             data_file: Path to data file
             sample_size: Sample size (None for full data)
             train_split: Train/test split ratio
+            use_sample_in_hash: Whether to include sample_size in hash (False allows reusing models across different sample sizes)
             
         Returns:
             Configuration dictionary
         """
-        return {
+        config = {
             'data_file': data_file,
-            'sample_size': sample_size,
             'train_split': train_split,
             'version': '1.0'  # Increment this to force retraining
         }
+        
+        # Only include sample_size in hash if explicitly requested
+        # This allows training on large dataset and inferring on smaller ones
+        if use_sample_in_hash:
+            config['sample_size'] = sample_size
+            
+        return config
