@@ -1,10 +1,9 @@
 {
-  "config_hash": "c75ddd9da323",
+  "config_hash": "8f57bb0241b6",
   "config": {
-    "data_file": "data/yellow_tripdata_2025-01_sample.csv",
+    "sample_size": 100000,
     "train_split": 0.8,
-    "version": "1.0",
-    "sample_size": 100000
+    "version": "1.0"
   },
-  "timestamp": "2026-04-29T21:52:46.010835"
+  "timestamp": "2026-04-30T11:45:00.000000"
 }

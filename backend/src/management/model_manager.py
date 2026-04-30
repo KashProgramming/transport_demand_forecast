@@ -222,7 +222,8 @@ class ModelManager:
     
     def get_config_from_params(self, data_file: str, sample_size: Optional[int], 
                                train_split: float = 0.8, 
-                               use_sample_in_hash: bool = True) -> Dict[str, Any]:
+                               use_sample_in_hash: bool = True,
+                               use_datafile_in_hash: bool = True) -> Dict[str, Any]:
         """
         Create configuration dictionary from parameters
         
@@ -231,15 +232,20 @@ class ModelManager:
             sample_size: Sample size (None for full data)
             train_split: Train/test split ratio
             use_sample_in_hash: Whether to include sample_size in hash (False allows reusing models across different sample sizes)
+            use_datafile_in_hash: Whether to include data_file in hash (False allows reusing models across different filenames)
             
         Returns:
             Configuration dictionary
         """
         config = {
-            'data_file': data_file,
             'train_split': train_split,
             'version': '1.0'  # Increment this to force retraining
         }
+        
+        # Only include data_file in hash if explicitly requested
+        # This allows training on one file and inferring on another (e.g., full vs sample)
+        if use_datafile_in_hash:
+            config['data_file'] = data_file
         
         # Only include sample_size in hash if explicitly requested
         # This allows training on large dataset and inferring on smaller ones
