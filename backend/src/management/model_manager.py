@@ -87,6 +87,9 @@ class ModelManager:
         """
         config_hash = self._generate_config_hash(config)
         
+        logger.info(f"Checking for models with hash: {config_hash}")
+        logger.info(f"Models directory: {self.models_dir}")
+        
         # Check if all model files exist
         model_names = ['arima', 'sarima', 'xgboost']
         all_exist = all(
@@ -96,6 +99,12 @@ class ModelManager:
         
         # Also check Prophet model
         prophet_exists = self._get_prophet_model_path(config_hash).exists()
+        
+        logger.info(f"ARIMA exists: {self._get_model_path('arima', config_hash).exists()}")
+        logger.info(f"SARIMA exists: {self._get_model_path('sarima', config_hash).exists()}")
+        logger.info(f"XGBoost exists: {self._get_model_path('xgboost', config_hash).exists()}")
+        logger.info(f"Prophet exists: {prophet_exists}")
+        logger.info(f"All models exist: {all_exist and prophet_exists}")
         
         return (all_exist and prophet_exists, config_hash)
     
