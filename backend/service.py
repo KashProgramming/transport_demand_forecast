@@ -630,33 +630,27 @@ class TransportForecastService:
 
             warnings_list.append("Failed to load saved models, training new ones...")
 
-        # PRODUCTION MODE: Only load models, never train
-        # If models don't exist, return error instead of training
-        logger.error(f"Models not found for config hash: {context.config_hash}")
-        logger.error(f"Model config: {context.model_config}")
-        
-        # COMMENTED OUT - Training disabled in production
-        # models, predictions = self._train_models(
-        #     context.train_data,
-        #     context.test_data,
-        #     context.X_train,
-        #     context.X_test,
-        #     context.y_train,
-        #     context.y_test,
-        #     warnings_list,
-        # )
-        #
-        # try:
-        #     self.model_manager.save_models(models, context.model_config)
-        #     self.model_manager.clear_old_models(keep_latest=3)
-        # except Exception as exc:  # pragma: no cover - persistence is best-effort
-        #     warnings_list.append(f"Models trained but failed to save: {exc}")
+        models, predictions = self._train_models(
+            context.train_data,
+            context.test_data,
+            context.X_train,
+            context.X_test,
+            context.y_train,
+            context.y_test,
+            warnings_list,
+        )
+
+        try:
+            self.model_manager.save_models(models, context.model_config)
+            self.model_manager.clear_old_models(keep_latest=3)
+        except Exception as exc:  # pragma: no cover - persistence is best-effort
+            warnings_list.append(f"Models trained but failed to save: {exc}")
 
         prepared = PreparedModels(
-            models={},
-            predictions={},
-            source="error",
-            warnings=["Models not found on disk. Pre-trained models must be deployed. No training available in production mode."],
+            models=models,
+            predictions=predictions,
+            source="trained",
+            warnings=warnings_list,
         )
         self._model_cache[context.config_hash] = prepared
         return prepared

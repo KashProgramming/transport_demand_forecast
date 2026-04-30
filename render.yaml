@@ -11,7 +11,7 @@ services:
       - key: PORT
         generateValue: true
       - key: USE_DATAFILE_IN_HASH
-        value: false
+        value: "false"
       - key: USE_SAMPLE_IN_HASH
-        value: true
+        value: "false"
     healthCheckPath: /health
