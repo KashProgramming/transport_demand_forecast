@@ -13,7 +13,9 @@ This system forecasts hourly taxi demand to:
 **Architecture**: RESTful API backend (FastAPI) + Interactive frontend (React + TypeScript)
 
 ## Demo
-[![Watch the demo to see how it works!](assets/demo.png)](https://drive.google.com/file/d/1bwk-50GFoKtDGY2btT2g4cgs2NtLSOEp/view?usp=sharing)
+👉 Watch the demo by clicking on the image:
+[![Demo](assets/demo.png)](https://drive.google.com/file/d/1bwk-50GFoKtDGY2btT2g4cgs2NtLSOEp/view?usp=sharing)
+
 ## Features
 
 ### Data Processing
