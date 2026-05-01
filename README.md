@@ -1,8 +1,8 @@
-# 🚕 Smart Urban Transport Demand Forecasting System
+# Smart Urban Transport Demand Forecasting System
 
 A production-quality full-stack web application for NYC Yellow Taxi demand forecasting, featuring a FastAPI backend with ML models and a modern React frontend with interactive visualizations.
 
-## 🎯 Project Overview
+## Project Overview
 
 This system forecasts hourly taxi demand to:
 - Identify peak congestion periods
@@ -12,7 +12,9 @@ This system forecasts hourly taxi demand to:
 
 **Architecture**: RESTful API backend (FastAPI) + Interactive frontend (React + TypeScript)
 
-## 📊 Features
+## Demo
+[![Watch the demo to see how it works!](assets/demo.png)](https://drive.google.com/file/d/1bwk-50GFoKtDGY2btT2g4cgs2NtLSOEp/view?usp=sharing)
+## Features
 
 ### Data Processing
 - **Efficient large-scale data handling** (~3.4M rows)
@@ -54,103 +56,7 @@ This system forecasts hourly taxi demand to:
 - Forecast visualizations with historical context
 - Responsive design for all screen sizes
 
-### Modern UI/UX
-- Clean, intuitive interface with warm color palette
-- Card-based layouts with smooth transitions
-- Real-time feedback and loading states
-- Sidebar configuration panel
-- Tab-based navigation
-- Mobile-responsive design
-
-## 🏗️ Project Structure
-
-```
-.
-├── README.md                   # Project documentation
-├── requirements.txt            # Python dependencies
-│
-├── backend/                    # FastAPI backend
-│   ├── main.py                # FastAPI application & routes
-│   ├── service.py             # Business logic layer
-│   ├── schemas.py             # Pydantic request/response models
-│   │
-│   ├── src/                   # Core backend modules
-│   │   ├── config.py         # Configuration settings
-│   │   │
-│   │   ├── core/             # Core data processing
-│   │   │   ├── data_loader.py    # Data loading with memory optimization
-│   │   │   ├── preprocessing.py  # Data cleaning and preprocessing
-│   │   │   └── aggregation.py    # Time series aggregation
-│   │   │
-│   │   ├── analysis/         # Analysis modules
-│   │   │   ├── eda.py           # Exploratory data analysis
-│   │   │   ├── features.py      # Feature engineering
-│   │   │   └── spatial_analysis.py # Location-based analysis
-│   │   │
-│   │   ├── evaluation/       # Model evaluation
-│   │   │   └── evaluation.py    # Model performance metrics
-│   │   │
-│   │   ├── management/       # Model management
-│   │   │   └── model_manager.py # Model persistence & loading
-│   │   │
-│   │   └── utils/            # Utility functions
-│   │       └── utils.py         # Helper functions
-│   │
-│   ├── models/               # ML models
-│   │   ├── arima_model.py       # ARIMA forecaster
-│   │   ├── sarima_model.py      # SARIMA forecaster
-│   │   ├── prophet_model.py     # Prophet forecaster
-│   │   └── xgboost_model.py     # XGBoost forecaster
-│   │
-│   ├── saved_models/         # Saved models (auto-generated)
-│   │   └── metadata.json        # Model configuration tracking
-│   │
-│   ├── tests/                # Backend tests
-│   │   └── test_api.py          # API endpoint tests
-│   │
-│   └── scripts/              # Utility scripts
-│       └── debug_weekday.py     # Debug script for weekday analysis
-│
-├── frontend/                   # React frontend
-│   ├── src/
-│   │   ├── main.tsx           # Application entry point
-│   │   ├── App.tsx            # Main application component
-│   │   ├── api.ts             # API client functions
-│   │   ├── types.ts           # TypeScript type definitions
-│   │   ├── index.css          # Global styles & Tailwind
-│   │   │
-│   │   ├── components/        # React components
-│   │   │   ├── Header.tsx        # App header
-│   │   │   ├── Sidebar.tsx       # Configuration sidebar
-│   │   │   ├── MetricsCards.tsx  # Key metrics display
-│   │   │   ├── TabNavigation.tsx # Tab switcher
-│   │   │   ├── WelcomeScreen.tsx # Landing page
-│   │   │   │
-│   │   │   └── tabs/          # Tab components
-│   │   │       ├── EDATab.tsx           # Exploratory Data Analysis
-│   │   │       ├── ForecastingTab.tsx   # Demand Forecasting
-│   │   │       ├── ModelComparisonTab.tsx # Model Performance
-│   │   │       ├── SpatialTab.tsx       # Spatial Analysis
-│   │   │       └── DataInfoTab.tsx      # Dataset Information
-│   │   │
-│   │   └── utils/             # Utility functions
-│   │       └── chartUtils.ts     # Chart.js configurations
-│   │
-│   ├── public/                # Static assets
-│   │   └── taxi.svg              # Favicon
-│   │
-│   ├── package.json           # Node.js dependencies
-│   ├── tsconfig.json          # TypeScript configuration
-│   ├── vite.config.ts         # Vite build configuration
-│   ├── tailwind.config.js     # Tailwind CSS configuration
-│   ├── README.md              # Frontend documentation
-│   └── SETUP.md               # Frontend setup guide
-│
-└── data/                       # Data files
-    └── yellow_tripdata_2025-01.csv
-```
-
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
 - **Python 3.8+** with pip
@@ -207,7 +113,7 @@ Place your NYC Yellow Taxi Trip CSV file in the `data/` folder:
 - Default path: `data/yellow_tripdata_2025-01.csv`
 - Or configure a custom path in the frontend sidebar
 
-## 💻 Usage
+## Usage
 
 ### Accessing the Application
 
@@ -245,33 +151,7 @@ Place your NYC Yellow Taxi Trip CSV file in the `data/` folder:
 - **Location Selection**: Choose from available zones
 - **Zone Comparison**: Compare multiple zones
 
-## 🔌 API Endpoints
-
-### Backend API (FastAPI)
-
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/health` | GET | Health check |
-| `/api/options` | GET | Get configuration options |
-| `/api/load` | POST | Load and preprocess data |
-| `/api/eda` | POST | Get EDA visualizations |
-| `/api/forecasting` | POST | Generate forecasts |
-| `/api/model-comparison` | POST | Compare model performance |
-| `/api/spatial` | POST | Get spatial analysis data |
-| `/api/data-info` | POST | Get dataset information |
-
-**Example Request:**
-```bash
-curl -X POST "http://localhost:8000/api/load" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "data_file": "data/yellow_tripdata_2025-01.csv",
-    "use_sample": true,
-    "sample_size": 100000
-  }'
-```
-
-## 📈 Models & Methodology
+## Models & Methodology
 
 ### Data Preprocessing
 - Remove invalid records (distance ≤ 0, fare ≤ 0, passengers ≤ 0 or > 10)
@@ -303,7 +183,7 @@ curl -X POST "http://localhost:8000/api/load" \
 - Confidence intervals (where applicable)
 - Non-negative constraint enforcement
 
-## 📊 Performance Optimization
+## Performance Optimization
 
 ### Backend
 - **Memory efficiency**: Optimized dtypes reduce memory by ~50%
@@ -322,7 +202,7 @@ curl -X POST "http://localhost:8000/api/load" \
 - **Vite optimization**: Fast HMR and optimized builds
 - **Chart.js**: Hardware-accelerated canvas rendering
 
-## 🛠️ Technology Stack
+## Tech Stack
 
 ### Backend
 | Technology | Purpose |
@@ -350,7 +230,7 @@ curl -X POST "http://localhost:8000/api/load" \
 | **Axios** | HTTP client for API calls |
 | **Lucide React** | Modern icon library |
 
-## 🔍 Key Insights Generated
+## Key Insights Generated
 
 1. **Peak Hours**: Identify busiest hours for fleet allocation
 2. **Demand Patterns**: Weekday vs weekend differences
@@ -359,9 +239,9 @@ curl -X POST "http://localhost:8000/api/load" \
 5. **Revenue Forecasting**: Predict hourly revenue
 6. **Model Performance**: Compare forecasting accuracy across models
 
-## 📝 Dataset Schema
+## Dataset Schema
 
-Expected CSV columns:
+CSV columns in current dataset:
 - `VendorID` (int)
 - `tpep_pickup_datetime` (datetime)
 - `tpep_dropoff_datetime` (datetime)
@@ -383,38 +263,6 @@ Expected CSV columns:
 - `Airport_fee` (float)
 - `cbd_congestion_fee` (float)
 
-## 🚢 Production Deployment
-
-### Backend Deployment
-```bash
-# Install production dependencies
-pip install -r requirements.txt
-
-# Run with production server
-cd backend
-uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
-```
-
-### Frontend Deployment
-```bash
-cd frontend
-
-# Build for production
-npm run build
-
-# Serve the dist/ folder with any static file server
-# Example with Python:
-python -m http.server 3000 --directory dist
-
-# Or with nginx, Apache, etc.
-```
-
-### Environment Variables
-**Frontend (.env):**
-```bash
-VITE_API_URL=https://your-api-domain.com
-```
-
 ## 🎓 Use Cases
 
 - **Urban Planning**: Understand transportation demand patterns
@@ -432,3 +280,4 @@ Contributions are welcome! Please follow these guidelines:
 3. Make your changes
 4. Add tests if applicable
 5. Submit a pull request
+
